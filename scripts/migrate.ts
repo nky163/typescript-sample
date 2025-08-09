@@ -1,5 +1,5 @@
-import { AppDataSource, initDataSource } from '../src/adapter/config/data-source';
-import logger from '../src/adapter/logging/logger';
+import { AppDataSource, initDataSource } from '../src/shared/config/data-source';
+import { logger } from '../src/shared/logging/logger';
 
 const runMigrations = async () => {
   try {

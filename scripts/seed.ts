@@ -1,5 +1,5 @@
-import { initDataSource } from '../src/adapter/config/data-source';
-import logger from '../src/adapter/logging/logger';
+import { initDataSource } from '../src/shared/config/data-source';
+import { logger } from '../src/shared/logging/logger';
 import { AccountORMEntity } from '../src/adapter/out/persistence/entities/account.orm-entity';
 
 const seedDatabase = async () => {
