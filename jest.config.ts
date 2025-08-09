@@ -1,6 +1,7 @@
 module.exports = {
   preset: 'ts-jest',
   testEnvironment: 'node',
+  verbose: true, // 追加: 個々のテストケース名を表示
   testPathIgnorePatterns: ['/node_modules/', '/dist/'],
   coverageDirectory: 'coverage',
   collectCoverageFrom: [
