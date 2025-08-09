@@ -4,14 +4,14 @@ import AppDataSource from '../../src/infrastructure/config/data-source';
 import { app } from '../../src/infrastructure/web/server';
 import { AccountORMEntity } from '../../src/infrastructure/persistence/entities/account.orm-entity';
 
-describe('Transfer Money Integration Tests', () => {
+describe('送金 統合テスト', () => {
   const repo = () => AppDataSource.getRepository(AccountORMEntity);
 
   beforeEach(async () => {
     await repo().clear();
   });
 
-  it('should transfer money between accounts', async () => {
+  it('アカウント間で送金に成功する', async () => {
     const senderEntity = repo().create({ balance: 100 });
     const receiverEntity = repo().create({ balance: 50 });
     await repo().save([senderEntity, receiverEntity]);
@@ -31,7 +31,7 @@ describe('Transfer Money Integration Tests', () => {
     expect(Number(updatedReceiver!.balance)).toBe(100);
   });
 
-  it('should return an error if sender has insufficient funds', async () => {
+  it('送金元の残高不足の場合エラーを返す', async () => {
     const senderEntity = repo().create({ balance: 30 });
     const receiverEntity = repo().create({ balance: 50 });
     await repo().save([senderEntity, receiverEntity]);

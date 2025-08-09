@@ -3,7 +3,7 @@ import { TransferMoneyDTO } from '../../../src/application/dto/transfer-money.dt
 import { Account } from '../../../src/domain/accounts/account.entity';
 import { AccountRepositoryPort } from '../../../src/domain/accounts/account.repository.port';
 
-describe('TransferMoneyUseCase', () => {
+describe('送金ユースケース', () => {
   let transferMoneyUseCase: TransferMoneyUseCase;
   let accountRepository: AccountRepositoryPort;
 
@@ -16,7 +16,7 @@ describe('TransferMoneyUseCase', () => {
     transferMoneyUseCase = new TransferMoneyUseCase(accountRepository);
   });
 
-  it('should transfer money between accounts', async () => {
+  it('アカウント間で送金できる', async () => {
     const sender = new Account('1', 100);
     const receiver = new Account('2', 50);
     const transferMoneyDTO = new TransferMoneyDTO(sender.getId(), receiver.getId(), 30);
@@ -33,7 +33,7 @@ describe('TransferMoneyUseCase', () => {
     expect(accountRepository.save).toHaveBeenCalledTimes(2);
   });
 
-  it('should throw an error if sender does not have enough balance', async () => {
+  it('送金元の残高が不足している場合はエラー', async () => {
     const sender = new Account('1', 20);
     const receiver = new Account('2', 50);
     const transferMoneyDTO = new TransferMoneyDTO(sender.getId(), receiver.getId(), 30);
@@ -48,7 +48,7 @@ describe('TransferMoneyUseCase', () => {
     );
   });
 
-  it('should throw an error if sender account does not exist', async () => {
+  it('送金元アカウントが存在しない場合はエラー', async () => {
     const transferMoneyDTO = new TransferMoneyDTO('non-existent-sender', '2', 30);
 
     accountRepository.findById = jest.fn().mockResolvedValueOnce(null);
@@ -58,7 +58,7 @@ describe('TransferMoneyUseCase', () => {
     );
   });
 
-  it('should throw an error if receiver account does not exist', async () => {
+  it('送金先アカウントが存在しない場合はエラー', async () => {
     const sender = new Account('1', 100);
     const transferMoneyDTO = new TransferMoneyDTO(sender.getId(), 'non-existent-receiver', 30);
 
