@@ -1,8 +1,8 @@
 import { DataSource, Repository } from 'typeorm';
-import { Account } from '../../../domain/accounts/account.entity';
-import { AccountRepositoryPort } from '../../../domain/accounts/account.repository.port';
+import { Account } from '../../../../application/domain/model/account'; // 修正: 階層の見直し
+import { AccountRepositoryPort } from '../../../../application/port/out/account-repository.port';
 import { AccountORMEntity } from '../entities/account.orm-entity';
-import logger from '../../../infrastructure/logging/logger';
+import logger from '../../../logging/logger'; // 修正: infrastructure -> logging
 
 export class AccountTypeORMRepository implements AccountRepositoryPort {
   private readonly repository: Repository<AccountORMEntity>;

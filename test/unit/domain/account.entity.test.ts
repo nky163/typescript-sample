@@ -1,4 +1,4 @@
-import { Account } from '../../../src/domain/accounts/account.entity';
+import { Account } from '../../../src/application/domain/model/account';
 
 describe('Accountエンティティ', () => {
   let account: Account;

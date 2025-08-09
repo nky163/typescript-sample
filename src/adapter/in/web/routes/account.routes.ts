@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { AccountController } from '../controllers/account.controller';
-import { TransferMoneyUseCase } from '../../../application/use-cases/transfer-money.usecase';
+import { TransferMoneyService } from '../../../application/use-cases/transfer-money.usecase';
 import { AccountTypeORMRepository } from '../../persistence/repositories/account.typeorm.repository';
 import AppDataSource, { initDataSource } from '../../config/data-source';
 import { z } from 'zod';
@@ -26,7 +26,7 @@ const transferSchema = z.object({
 router.post('/transfer', validateBody(transferSchema), async (req, res, next) => {
   try {
     const repository = await getRepository();
-    const transferMoneyUseCase = new TransferMoneyUseCase(repository);
+    const transferMoneyUseCase = new TransferMoneyService(repository);
     const accountController = new AccountController(transferMoneyUseCase);
     return await accountController.transferMoney(req, res);
   } catch (e) {
