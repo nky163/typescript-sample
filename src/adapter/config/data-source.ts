@@ -1,5 +1,5 @@
 import { DataSource } from 'typeorm';
-import { AccountORMEntity } from '../persistence/entities/account.orm-entity';
+import { AccountORMEntity } from '../out/persistence/entities/account.orm-entity';
 import env from './env';
 import logger from '../logging/logger';
 
@@ -13,7 +13,7 @@ export const AppDataSource = new DataSource({
   synchronize: false,
   logging: false,
   entities: [AccountORMEntity],
-  migrations: [__dirname + '/../persistence/migrations/*.{ts,js}'],
+  migrations: [__dirname + '/../out/persistence/migrations/*.{ts,js}'],
   subscribers: [],
 });
 
