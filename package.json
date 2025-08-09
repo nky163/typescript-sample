@@ -12,17 +12,20 @@
     "seed": "ts-node scripts/seed.ts",
     "test:db:up": "docker compose -f docker-compose.test.yml up -d db",
     "test:db:down": "docker compose -f docker-compose.test.yml down -v",
-    "test": "npm run test:db:up && npm run migrate && jest && npm run test:db:down",
+    "test": "npm run test:db:up && DB_HOST=localhost DB_PORT=5432 DB_USER=user DB_PASSWORD=password DB_NAME=sample_db sh -c 'npm run migrate && jest' && npm run test:db:down",
     "lint": "gts lint",
     "lint:fix": "gts fix",
     "format": "gts format",
     "check": "gts check",
-    "ci": "npm run lint && npm test"
+    "ci": "gts check && npm run dep:check && npm test",
+    "dep:check": "dependency-cruise -c .dependency-cruiser.js src | tee dependency-graph.dot"
   },
   "dependencies": {
+    "decimal.js": "^10.6.0",
     "dotenv": "^17.2.1",
     "express": "^4.21.2",
     "pg": "^8.12.0",
+    "reflect-metadata": "^0.2.2",
     "typeorm": "^0.3.25",
     "winston": "^3.13.0",
     "zod": "^4.0.16"
@@ -32,6 +35,8 @@
     "@types/jest": "^29.5.12",
     "@types/node": "^20.14.11",
     "@types/supertest": "^2.0.16",
+    "@types/pg": "^8.11.6",
+    "dependency-cruiser": "^16.6.0",
     "gts": "^6.0.0",
     "husky": "^9.0.11",
     "jest": "^29.7.0",

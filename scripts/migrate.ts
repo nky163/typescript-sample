@@ -1,4 +1,4 @@
-import { AppDataSource, initDataSource } from '../src/shared/config/data-source';
+import { initDataSource, AppDataSource } from '../src/shared/config/data-source';
 import { logger } from '../src/shared/logging/logger';
 
 const runMigrations = async () => {
