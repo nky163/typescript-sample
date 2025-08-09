@@ -1,8 +1,8 @@
 import { Router } from 'express';
 import { AccountController } from '../controllers/account.controller';
-import { TransferMoneyService } from '../../../application/use-cases/transfer-money.usecase';
-import { AccountTypeORMRepository } from '../../persistence/repositories/account.typeorm.repository';
-import AppDataSource, { initDataSource } from '../../config/data-source';
+import { SendMoneyService } from '../../../../application/use-cases/send-money.service';
+import { AccountTypeORMRepository } from '../../../out/persistence/repositories/account.typeorm.repository';
+import AppDataSource, { initDataSource } from '../../../config/data-source';
 import { z } from 'zod';
 import { validateBody } from '../middleware/validation.middleware';
 
@@ -26,7 +26,7 @@ const transferSchema = z.object({
 router.post('/transfer', validateBody(transferSchema), async (req, res, next) => {
   try {
     const repository = await getRepository();
-    const transferMoneyUseCase = new TransferMoneyService(repository);
+    const transferMoneyUseCase = new SendMoneyService(repository);
     const accountController = new AccountController(transferMoneyUseCase);
     return await accountController.transferMoney(req, res);
   } catch (e) {
@@ -48,7 +48,7 @@ router.post('/accounts', validateBody(createAccountSchema), async (req, res, nex
 router.get('/accounts', async (_req, res) => {
   const repository = await getRepository();
   const accounts = await repository.findAll();
-  res.json(accounts.map((a) => ({ id: a.getId(), balance: a.getBalance() })));
+  res.json(accounts.map((a: any) => ({ id: a.getId(), balance: a.getBalance() })));
 });
 
 export default router;

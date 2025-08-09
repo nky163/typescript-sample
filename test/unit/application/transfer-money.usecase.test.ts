@@ -1,5 +1,5 @@
 import { TransferMoneyService } from '../../../src/application/use-cases/transfer-money.usecase';
-import { TransferMoneyCommand } from '../../../src/application/dto/transfer-money.command';
+import { TransferMoneyCommand } from '../../../src/application/port/in/transfer-money.command';
 import { Account } from '../../../src/application/domain/model/account'; // 変更
 import { AccountRepositoryPort } from '../../../src/application/port/out/account-repository.port'; // 変更
 

@@ -12,5 +12,5 @@ app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });
 
-// Deprecated: use src/adapter/in/web/server.ts as entrypoint
+// Entry now delegates to adapter web server
 export * from './adapter/in/web/server';

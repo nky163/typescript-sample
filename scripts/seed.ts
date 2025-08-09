@@ -1,6 +1,6 @@
-import { initDataSource } from '../src/infrastructure/config/data-source';
-import logger from '../src/infrastructure/logging/logger';
-import { AccountORMEntity } from '../src/infrastructure/persistence/entities/account.orm-entity';
+import { initDataSource } from '../src/adapter/config/data-source';
+import logger from '../src/adapter/logging/logger';
+import { AccountORMEntity } from '../src/adapter/out/persistence/entities/account.orm-entity';
 
 const seedDatabase = async () => {
   const ds = await initDataSource();

@@ -1,4 +1,4 @@
-import AppDataSource from '../src/infrastructure/config/data-source';
+import AppDataSource from '../src/adapter/config/data-source';
 
 beforeAll(async () => {
   if (!AppDataSource.isInitialized) {

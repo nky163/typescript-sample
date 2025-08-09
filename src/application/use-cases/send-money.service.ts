@@ -1,13 +1,12 @@
-import { AccountRepositoryPort } from '../port/out/account-repository.port'; // 変更
+import { AccountRepositoryPort } from '../port/out/account-repository.port';
 import { NotFoundError } from '../../shared/errors/not-found.error';
 import DomainError from '../../shared/errors/domain-error';
 import { TransferMoneyCommand } from '../port/in/transfer-money.command';
-import { TransferMoneyUseCase as TransferMoneyUseCaseInPort } from '../port/in/transfer-money.use-case';
-import { UseCase } from '../common/decorators'; // 追加
+import { TransferMoneyUseCase } from '../port/in/transfer-money.use-case';
+import { UseCase } from '../common/decorators';
 
-// TODO: rename this file to send-money.service.ts for buckpal alignment.
-@UseCase() // 追加
-export class TransferMoneyService implements TransferMoneyUseCaseInPort {
+@UseCase()
+export class SendMoneyService implements TransferMoneyUseCase {
   constructor(private accountRepository: AccountRepositoryPort) {}
 
   async execute(command: TransferMoneyCommand): Promise<void> {
@@ -43,5 +42,5 @@ export class TransferMoneyService implements TransferMoneyUseCaseInPort {
   }
 }
 
-// Deprecated: logic moved to send-money.service.ts
-export * from './send-money.service';
+// Backward compatibility during transition
+export class TransferMoneyService extends SendMoneyService {}

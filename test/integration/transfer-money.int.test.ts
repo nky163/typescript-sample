@@ -1,8 +1,8 @@
 /* eslint-disable n/no-unpublished-import */
 import request from 'supertest';
-import AppDataSource from '../../src/infrastructure/config/data-source';
-import { app } from '../../src/infrastructure/web/server';
-import { AccountORMEntity } from '../../src/infrastructure/persistence/entities/account.orm-entity';
+import AppDataSource from '../../src/adapter/config/data-source';
+import { app } from '../../src/adapter/in/web/server';
+import { AccountORMEntity } from '../../src/adapter/out/persistence/entities/account.orm-entity';
 
 describe('送金 統合テスト', () => {
   const repo = () => AppDataSource.getRepository(AccountORMEntity);

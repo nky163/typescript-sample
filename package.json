@@ -2,11 +2,11 @@
   "name": "typescript-sample",
   "version": "1.0.0",
   "description": "A sample application implementing Clean Architecture and Hexagonal Architecture using TypeScript, Express, TypeORM, and PostgreSQL.",
-  "main": "src/infrastructure/web/server.ts",
+  "main": "dist/adapter/in/web/server.js",
   "scripts": {
     "prepare": "husky install",
     "start:db": "docker compose up -d db",
-    "start": "npm run start:db && ts-node src/infrastructure/web/server.ts",
+    "start": "npm run start:db && ts-node src/adapter/in/web/server.ts",
     "build": "tsc",
     "migrate": "ts-node scripts/migrate.ts",
     "seed": "ts-node scripts/seed.ts",
