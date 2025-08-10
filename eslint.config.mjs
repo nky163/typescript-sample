@@ -38,14 +38,20 @@ export default [
       'prettier/prettier': 'error',
       '@typescript-eslint/no-floating-promises': 'error',
       '@typescript-eslint/no-misused-promises': ['error', { checksVoidReturn: { attributes: false } }],
-      '@typescript-eslint/no-explicit-any': 'warn',
+      '@typescript-eslint/no-explicit-any': 'error',
       '@typescript-eslint/consistent-type-imports': 'error',
       '@typescript-eslint/no-unused-vars': 'off',
+      '@typescript-eslint/consistent-type-assertions': [
+        'error',
+        { assertionStyle: 'as', objectLiteralTypeAssertions: 'never' }
+      ],
+      '@typescript-eslint/prefer-as-const': 'error',
       'unused-imports/no-unused-imports': 'error',
       'unused-imports/no-unused-vars': [
         'error',
         { vars: 'all', varsIgnorePattern: '^_', args: 'after-used', argsIgnorePattern: '^_' }
       ],
+      'import/no-default-export': 'error',
       'import/order': [
         'warn',
         {
@@ -59,7 +65,19 @@ export default [
   'import/no-unresolved': 'off',
       'n/no-missing-import': 'off',
       'n/no-unsupported-features/es-syntax': 'off',
-      'no-console': 'off'
+      'no-console': 'off',
+      'no-new-wrappers': 'error',
+      'no-restricted-syntax': [
+        'error',
+        {
+          selector: 'TSEnumDeclaration[const=true]',
+          message: 'Do not use const enum; use a regular enum instead.'
+        },
+        {
+          selector: 'PropertyDefinition[key.type="PrivateIdentifier"]',
+          message: 'Do not use #private fields; use TypeScript private visibility modifier instead.'
+        }
+      ]
     }
   },
   {
