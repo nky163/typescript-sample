@@ -37,3 +37,6 @@ coverage/
 
 # Misc
 .tmp/
+
+# Lint reports (temporary)
+eslint-report.json
