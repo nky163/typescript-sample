@@ -46,6 +46,14 @@ export default [
         { assertionStyle: 'as', objectLiteralTypeAssertions: 'never' }
       ],
       '@typescript-eslint/prefer-as-const': 'error',
+  'prefer-const': ['error', { destructuring: 'all' }],
+  'no-var': 'error',
+  'func-style': ['error', 'declaration', { allowArrowFunctions: true }],
+  'prefer-arrow-callback': ['error', { allowNamedFunctions: false, allowUnboundThis: true }],
+  '@typescript-eslint/switch-exhaustiveness-check': 'error',
+  '@typescript-eslint/no-namespace': 'error',
+  'import/first': 'error',
+  '@typescript-eslint/consistent-type-definitions': ['error', 'interface'],
       'unused-imports/no-unused-imports': 'error',
       'unused-imports/no-unused-vars': [
         'error',
@@ -60,7 +68,6 @@ export default [
           alphabetize: { order: 'asc', caseInsensitive: true }
         }
       ],
-      'import/no-unresolved': 'error',
   // TypeScript compiler handles module resolution; reduce noise after mass renames
   'import/no-unresolved': 'off',
       'n/no-missing-import': 'off',
