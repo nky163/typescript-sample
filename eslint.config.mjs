@@ -49,7 +49,7 @@ export default [
       'unused-imports/no-unused-imports': 'error',
       'unused-imports/no-unused-vars': [
         'error',
-        { vars: 'all', varsIgnorePattern: '^_', args: 'after-used', argsIgnorePattern: '^_' }
+        { vars: 'all', args: 'after-used', argsIgnorePattern: '^_' }
       ],
       'import/no-default-export': 'error',
       'import/order': [
