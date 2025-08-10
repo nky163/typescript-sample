@@ -1,6 +1,8 @@
-import { AccountId as _AccountId } from '../../domain/model/Account';
-import { Money as _Money } from '../../domain/model/Money';
 import { z } from 'zod';
+
+import { AccountId as _AccountId } from '../../domain/model/account';
+
+import type { Money as _Money } from '../../domain/model/money';
 
 // Money型判定 + 正数チェック用ヘルパ (any排除)
 const hasFunction = (obj: unknown, name: string): boolean =>

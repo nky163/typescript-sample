@@ -1,9 +1,11 @@
-import { Account, AccountId } from '../../../application/domain/model/Account';
-import { Activity, ActivityId } from '../../../application/domain/model/Activity';
-import { ActivityWindow } from '../../../application/domain/model/ActivityWindow';
-import { Money } from '../../../application/domain/model/Money';
-import { AccountEntity } from './entity/AccountEntity';
-import { ActivityEntity } from './entity/ActivityEntity';
+import { Account, AccountId } from '../../../application/domain/model/account';
+import { Activity, ActivityId } from '../../../application/domain/model/activity';
+import { ActivityWindow } from '../../../application/domain/model/activity-window';
+import { Money } from '../../../application/domain/model/money';
+
+import { ActivityEntity } from './entity/activity-entity';
+
+import type { AccountEntity } from './entity/account-entity';
 
 export class AccountMapper {
   mapToDomainEntity(

@@ -1,6 +1,6 @@
+import { AccountEntity } from '../src/adapter/out/persistence/entity/account-entity';
 import { initDataSource } from '../src/shared/config/data-source';
 import { logger } from '../src/shared/logging/logger';
-import { AccountEntity } from '../src/adapter/out/persistence/entity/AccountEntity';
 
 const seedDatabase = async () => {
   const ds = await initDataSource();
@@ -12,7 +12,11 @@ const seedDatabase = async () => {
   await ds.destroy();
 };
 
-seedDatabase().catch((error) => {
-  logger.error('Error seeding database', { error });
+seedDatabase().catch((error: unknown) => {
+  const errObj = error as Error;
+  logger.error('Error seeding database', {
+    message: errObj.message,
+    stack: errObj.stack,
+  });
   throw error;
 });

@@ -1,6 +1,6 @@
-import { SendMoneyCommand } from '../../../../src/application/port/in/SendMoneyCommand';
-import { AccountId } from '../../../../src/application/domain/model/Account';
-import { Money } from '../../../../src/application/domain/model/Money';
+import { AccountId } from '../../../../src/application/domain/model/account';
+import { Money } from '../../../../src/application/domain/model/money';
+import { SendMoneyCommand } from '../../../../src/application/port/in/send-money-command';
 
 describe('SendMoneyCommandTest', () => {
   it('validationOk', () => {

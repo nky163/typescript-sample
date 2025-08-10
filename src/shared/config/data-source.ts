@@ -1,10 +1,12 @@
 import 'reflect-metadata';
-import { DataSource } from 'typeorm';
-import { AccountEntity } from '../../adapter/out/persistence/entity/AccountEntity';
-import { ActivityEntity } from '../../adapter/out/persistence/entity/ActivityEntity';
-import { logger } from '../logging/logger';
 import path from 'path';
+
 import dotenv from 'dotenv';
+import { DataSource } from 'typeorm';
+
+import { AccountEntity } from '../../adapter/out/persistence/entity/account-entity';
+import { ActivityEntity } from '../../adapter/out/persistence/entity/activity-entity';
+import { logger } from '../logging/logger';
 
 dotenv.config();
 

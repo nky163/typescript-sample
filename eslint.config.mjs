@@ -1,0 +1,78 @@
+// ESLint flat config migrating from .eslintrc for ESLint v9
+import js from '@eslint/js';
+import tseslint from 'typescript-eslint';
+import pluginImport from 'eslint-plugin-import';
+import pluginUnused from 'eslint-plugin-unused-imports';
+import pluginPrettier from 'eslint-plugin-prettier';
+import pluginN from 'eslint-plugin-n';
+import { FlatCompat } from '@eslint/eslintrc';
+
+const compat = new FlatCompat({ baseDirectory: process.cwd() });
+
+export default [
+  { ignores: ['dist', 'node_modules', 'eslint.config.mjs', '.dependency-cruiser.js', '**/*.js', '**/*.cjs', '**/*.mjs'] },
+  // Use compat for pluginImport and pluginN recommended to ensure proper flat plugin shape
+  js.configs.recommended,
+  ...tseslint.configs.recommended,
+  ...tseslint.configs.recommendedTypeChecked,
+  ...compat.config(pluginImport.configs.recommended),
+  ...compat.config(pluginN.configs['recommended-module']),
+  {
+    files: ['**/*.ts'],
+    languageOptions: {
+      parser: tseslint.parser,
+      parserOptions: {
+        project: ['./tsconfig.eslint.json'],
+        tsconfigRootDir: process.cwd(),
+        sourceType: 'module'
+      }
+    },
+    plugins: {
+      '@typescript-eslint': tseslint.plugin,
+      import: pluginImport,
+      'unused-imports': pluginUnused,
+      prettier: pluginPrettier,
+      n: pluginN
+    },
+    rules: {
+      'prettier/prettier': 'error',
+      '@typescript-eslint/no-floating-promises': 'error',
+      '@typescript-eslint/no-misused-promises': ['error', { checksVoidReturn: { attributes: false } }],
+      '@typescript-eslint/no-explicit-any': 'warn',
+      '@typescript-eslint/consistent-type-imports': 'error',
+      '@typescript-eslint/no-unused-vars': 'off',
+      'unused-imports/no-unused-imports': 'error',
+      'unused-imports/no-unused-vars': [
+        'error',
+        { vars: 'all', varsIgnorePattern: '^_', args: 'after-used', argsIgnorePattern: '^_' }
+      ],
+      'import/order': [
+        'warn',
+        {
+          groups: ['builtin', 'external', 'internal', 'parent', 'sibling', 'index', 'object', 'type'],
+          'newlines-between': 'always',
+          alphabetize: { order: 'asc', caseInsensitive: true }
+        }
+      ],
+      'import/no-unresolved': 'error',
+  // TypeScript compiler handles module resolution; reduce noise after mass renames
+  'import/no-unresolved': 'off',
+      'n/no-missing-import': 'off',
+      'n/no-unsupported-features/es-syntax': 'off',
+      'no-console': 'off'
+    }
+  },
+  {
+    files: ['test/**/*.{ts,tsx}'],
+    rules: {
+      '@typescript-eslint/no-explicit-any': 'off',
+      '@typescript-eslint/no-non-null-assertion': 'off'
+    }
+  },
+  {
+    files: ['scripts/**/*.{ts,js}'],
+    rules: {
+      '@typescript-eslint/no-var-requires': 'off'
+    }
+  }
+];

@@ -1,15 +1,17 @@
 /* eslint-disable n/no-unpublished-import */
-import request from 'supertest';
 import express from 'express';
-import { createSendMoneyRouter } from '../../../../src/adapter/in/web/SendMoneyController';
-import { SendMoneyUseCase } from '../../../../src/application/port/in/SendMoneyUseCase';
-import { SendMoneyCommand } from '../../../../src/application/port/in/SendMoneyCommand';
+import request from 'supertest';
+
+import { createSendMoneyRouter } from '../../../../src/adapter/in/web/send-money-controller';
+
+import type { SendMoneyCommand } from '../../../../src/application/port/in/send-money-command';
+import type { SendMoneyUseCase } from '../../../../src/application/port/in/send-money-use-case';
 
 class MockSendMoneyUseCase implements SendMoneyUseCase {
   lastCommand?: SendMoneyCommand;
-  async sendMoney(command: SendMoneyCommand): Promise<boolean> {
+  sendMoney(command: SendMoneyCommand): Promise<boolean> {
     this.lastCommand = command;
-    return true;
+    return Promise.resolve(true);
   }
 }
 

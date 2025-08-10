@@ -1,4 +1,4 @@
-import { Money } from '../model/Money';
+import type { Money } from '../model/money';
 
 export class ThresholdExceededException extends Error {
   constructor(threshold: Money, actual: Money) {

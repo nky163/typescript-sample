@@ -1,7 +1,7 @@
-import { Activity } from '../../../src/application/domain/model/Activity';
-import { ActivityWindow } from '../../../src/application/domain/model/ActivityWindow';
-import { AccountId } from '../../../src/application/domain/model/Account';
-import { Money } from '../../../src/application/domain/model/Money';
+import { AccountId } from '../../../src/application/domain/model/account';
+import { Activity } from '../../../src/application/domain/model/activity';
+import { ActivityWindow } from '../../../src/application/domain/model/activity-window';
+import { Money } from '../../../src/application/domain/model/money';
 
 describe('ActivityWindow', () => {
   function startDate() {

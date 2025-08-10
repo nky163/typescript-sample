@@ -1,5 +1,5 @@
-import { Money } from './Money';
-import { AccountId } from './Account';
+import type { AccountId } from './account';
+import type { Money } from './money';
 
 export class ActivityId {
   constructor(public readonly value: number) {}

@@ -1,5 +1,5 @@
-import { AccountLock } from '../../../application/port/out/AccountLock';
-import { AccountId } from '../../../application/domain/model/Account';
+import type { AccountId } from '../../../application/domain/model/account';
+import type { AccountLock } from '../../../application/port/out/account-lock';
 
 export class NoOpAccountLock implements AccountLock {
   async lockAccount(_accountId: AccountId): Promise<void> {

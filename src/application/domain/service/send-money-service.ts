@@ -1,10 +1,11 @@
-import { SendMoneyUseCase } from '../../port/in/SendMoneyUseCase';
-import { SendMoneyCommand } from '../../port/in/SendMoneyCommand';
-import { LoadAccountPort } from '../../port/out/LoadAccountPort';
-import { AccountLock } from '../../port/out/AccountLock';
-import { UpdateAccountStatePort } from '../../port/out/UpdateAccountStatePort';
-import { MoneyTransferProperties } from './MoneyTransferProperties';
-import { ThresholdExceededException } from './ThresholdExceededException';
+import { ThresholdExceededException } from './threshold-exceeded-exception';
+
+import type { MoneyTransferProperties } from './money-transfer-properties';
+import type { SendMoneyCommand } from '../../port/in/send-money-command';
+import type { SendMoneyUseCase } from '../../port/in/send-money-use-case';
+import type { AccountLock } from '../../port/out/account-lock';
+import type { LoadAccountPort } from '../../port/out/load-account-port';
+import type { UpdateAccountStatePort } from '../../port/out/update-account-state-port';
 
 export class SendMoneyService implements SendMoneyUseCase {
   constructor(

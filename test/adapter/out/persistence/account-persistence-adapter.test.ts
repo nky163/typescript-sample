@@ -1,12 +1,13 @@
 import 'reflect-metadata';
 import { DataSource } from 'typeorm';
-import { AccountPersistenceAdapter } from '../../../../src/adapter/out/persistence/AccountPersistenceAdapter';
-import { AccountMapper } from '../../../../src/adapter/out/persistence/AccountMapper';
-import { AccountEntity } from '../../../../src/adapter/out/persistence/entity/AccountEntity';
-import { ActivityEntity } from '../../../../src/adapter/out/persistence/entity/ActivityEntity';
-import { AccountId } from '../../../../src/application/domain/model/Account';
-import { Money } from '../../../../src/application/domain/model/Money';
-import { Activity } from '../../../../src/application/domain/model/Activity';
+
+import { AccountMapper } from '../../../../src/adapter/out/persistence/account-mapper';
+import { AccountPersistenceAdapter } from '../../../../src/adapter/out/persistence/account-persistence-adapter';
+import { AccountEntity } from '../../../../src/adapter/out/persistence/entity/account-entity';
+import { ActivityEntity } from '../../../../src/adapter/out/persistence/entity/activity-entity';
+import { AccountId } from '../../../../src/application/domain/model/account';
+import { Activity } from '../../../../src/application/domain/model/activity';
+import { Money } from '../../../../src/application/domain/model/money';
 
 let dataSource: DataSource;
 
@@ -62,15 +63,15 @@ afterAll(async () => {
   await dataSource.destroy();
 });
 
-describe('AccountPersistenceAdapterTest', () => {
-  it('loadsAccount', async () => {
+describe('AccountPersistenceAdapter', () => {
+  it('loads account within baseline window', async () => {
     const adapter = new AccountPersistenceAdapter(dataSource, new AccountMapper());
     const account = await adapter.loadAccount(new AccountId(1), new Date('2018-08-10T00:00:00Z'));
     expect(account.activityWindow.getActivities().length).toBe(2); // activities after baselineDate
-    expect(account.calculateBalance().getAmount()).toBe(500); // matches java test
+    expect(account.calculateBalance().getAmount()).toBe(500);
   });
 
-  it('updatesActivities', async () => {
+  it('persists new activities', async () => {
     const adapter = new AccountPersistenceAdapter(dataSource, new AccountMapper());
     const acc = await adapter.loadAccount(new AccountId(1), new Date('2025-01-01T00:00:00Z'));
     acc.activityWindow.addActivity(

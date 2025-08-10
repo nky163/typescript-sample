@@ -1,18 +1,20 @@
 import 'reflect-metadata';
 import express from 'express';
 import { DataSource } from 'typeorm';
-import { AccountEntity } from '../../out/persistence/entity/AccountEntity';
-import { ActivityEntity } from '../../out/persistence/entity/ActivityEntity';
-import { AccountMapper } from '../../out/persistence/AccountMapper';
-import { AccountPersistenceAdapter } from '../../out/persistence/AccountPersistenceAdapter';
-import { NoOpAccountLock } from '../../out/persistence/NoOpAccountLock';
-import { MoneyTransferProperties } from '../../../application/domain/service/MoneyTransferProperties';
-import { SendMoneyService } from '../../../application/domain/service/SendMoneyService';
-import { createSendMoneyRouter } from './SendMoneyController';
-import { GetAccountBalanceService } from '../../../application/domain/service/GetAccountBalanceService';
-import { GetAccountBalanceQuery } from '../../../application/port/in/GetAccountBalanceUseCase';
-import { AccountId } from '../../../application/domain/model/Account';
-import { Money } from '../../../application/domain/model/Money';
+
+import { AccountId } from '../../../application/domain/model/account';
+import { Money } from '../../../application/domain/model/money';
+import { GetAccountBalanceService } from '../../../application/domain/service/get-account-balance-service';
+import { MoneyTransferProperties } from '../../../application/domain/service/money-transfer-properties';
+import { SendMoneyService } from '../../../application/domain/service/send-money-service';
+import { GetAccountBalanceQuery } from '../../../application/port/in/get-account-balance-use-case';
+import { AccountMapper } from '../../out/persistence/account-mapper';
+import { AccountPersistenceAdapter } from '../../out/persistence/account-persistence-adapter';
+import { AccountEntity } from '../../out/persistence/entity/account-entity';
+import { ActivityEntity } from '../../out/persistence/entity/activity-entity';
+import { NoOpAccountLock } from '../../out/persistence/no-op-account-lock';
+
+import { createSendMoneyRouter } from './send-money-controller';
 
 const app = express();
 
@@ -49,20 +51,19 @@ async function bootstrap() {
   app.use(createSendMoneyRouter(sendMoneyService));
 
   // Simple balance endpoint
-  app.get('/accounts/:id/balance', async (req, res) => {
-    try {
-      const id = Number(req.params.id);
-      if (Number.isNaN(id)) {
-        return res.status(400).json({ error: 'id must be number' });
-      }
-      const money = await getBalanceService.getAccountBalance(
-        new GetAccountBalanceQuery(new AccountId(id)),
-      );
-      res.json({ balance: money.getAmount() });
-    } catch (e: unknown) {
-      const message = e instanceof Error ? e.message : 'unknown error';
-      res.status(400).json({ error: message });
+  app.get('/accounts/:id/balance', (req, res) => {
+    const id = Number(req.params.id);
+    if (Number.isNaN(id)) {
+      return res.status(400).json({ error: 'id must be number' });
     }
+    void Promise.resolve(
+      getBalanceService.getAccountBalance(new GetAccountBalanceQuery(new AccountId(id))),
+    )
+      .then((money) => res.json({ balance: money.getAmount() }))
+      .catch((e: unknown) => {
+        const message = e instanceof Error ? e.message : 'unknown error';
+        res.status(400).json({ error: message });
+      });
   });
 
   const port = process.env.PORT || 3000;

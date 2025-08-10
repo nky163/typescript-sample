@@ -1,31 +1,34 @@
-import { SendMoneyService } from '../../../src/application/domain/service/SendMoneyService';
-import { MoneyTransferProperties } from '../../../src/application/domain/service/MoneyTransferProperties';
-import { ThresholdExceededException } from '../../../src/application/domain/service/ThresholdExceededException';
-import { SendMoneyCommand } from '../../../src/application/port/in/SendMoneyCommand';
-import { Account, AccountId } from '../../../src/application/domain/model/Account';
-import { ActivityWindow } from '../../../src/application/domain/model/ActivityWindow';
-import { Money } from '../../../src/application/domain/model/Money';
-import { LoadAccountPort } from '../../../src/application/port/out/LoadAccountPort';
-import { UpdateAccountStatePort } from '../../../src/application/port/out/UpdateAccountStatePort';
-import { AccountLock } from '../../../src/application/port/out/AccountLock';
+import { Account, AccountId } from '../../../src/application/domain/model/account';
+import { ActivityWindow } from '../../../src/application/domain/model/activity-window';
+import { Money } from '../../../src/application/domain/model/money';
+import { MoneyTransferProperties } from '../../../src/application/domain/service/money-transfer-properties';
+import { SendMoneyService } from '../../../src/application/domain/service/send-money-service';
+import { ThresholdExceededException } from '../../../src/application/domain/service/threshold-exceeded-exception';
+import { SendMoneyCommand } from '../../../src/application/port/in/send-money-command';
+
+import type { AccountLock } from '../../../src/application/port/out/account-lock';
+import type { LoadAccountPort } from '../../../src/application/port/out/load-account-port';
+import type { UpdateAccountStatePort } from '../../../src/application/port/out/update-account-state-port';
 
 class InMemoryAccountLock implements AccountLock {
   locked: AccountId[] = [];
-  async lockAccount(accountId: AccountId): Promise<void> {
+  lockAccount(accountId: AccountId): Promise<void> {
     this.locked.push(accountId);
+    return Promise.resolve();
   }
-  async releaseAccount(accountId: AccountId): Promise<void> {
+  releaseAccount(accountId: AccountId): Promise<void> {
     this.locked = this.locked.filter((a) => a.value !== accountId.value);
+    return Promise.resolve();
   }
 }
 
 class StubPersistence implements LoadAccountPort, UpdateAccountStatePort {
   constructor(private accounts: Record<number, Account>) {}
-  async loadAccount(id: AccountId, _baselineDate: Date): Promise<Account> {
-    return this.accounts[id.value];
+  loadAccount(id: AccountId, _baselineDate: Date): Promise<Account> {
+    return Promise.resolve(this.accounts[id.value]);
   }
-  async updateActivities(): Promise<void> {
-    /* noop */
+  updateActivities(): Promise<void> {
+    return Promise.resolve();
   }
 }
 

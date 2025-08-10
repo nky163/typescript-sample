@@ -1,6 +1,7 @@
-import { Activity } from './Activity';
-import { AccountId } from './Account';
-import { Money } from './Money';
+import { Money } from './money';
+
+import type { AccountId } from './account';
+import type { Activity } from './activity';
 
 export class ActivityWindow {
   private activities: Activity[];

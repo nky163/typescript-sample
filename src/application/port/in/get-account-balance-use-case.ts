@@ -1,5 +1,5 @@
-import { Money } from '../../domain/model/Money';
-import { AccountId } from '../../domain/model/Account';
+import type { AccountId } from '../../domain/model/account';
+import type { Money } from '../../domain/model/money';
 
 export interface GetAccountBalanceUseCase {
   getAccountBalance(query: GetAccountBalanceQuery): Promise<Money> | Money;

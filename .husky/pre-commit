@@ -1,3 +1,6 @@
 #!/usr/bin/env sh
-npm run lint:fix --if-present
-npx lint-staged
+. "$(dirname -- "$0")/_/husky.sh" 2>/dev/null || true
+
+# Run ESLint --fix on staged TS/JS via lint-staged (package.json config)
+npm run lint:fix --if-present || exit 1
+npx lint-staged --no-stash || exit 1

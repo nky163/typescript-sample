@@ -1,15 +1,16 @@
-import { GetAccountBalanceService } from '../../../src/application/domain/service/GetAccountBalanceService';
-import { GetAccountBalanceQuery } from '../../../src/application/port/in/GetAccountBalanceUseCase';
-import { Account, AccountId } from '../../../src/application/domain/model/Account';
-import { ActivityWindow } from '../../../src/application/domain/model/ActivityWindow';
-import { Money } from '../../../src/application/domain/model/Money';
-import { Activity } from '../../../src/application/domain/model/Activity';
-import { LoadAccountPort } from '../../../src/application/port/out/LoadAccountPort';
+import { Account, AccountId } from '../../../src/application/domain/model/account';
+import { Activity } from '../../../src/application/domain/model/activity';
+import { ActivityWindow } from '../../../src/application/domain/model/activity-window';
+import { Money } from '../../../src/application/domain/model/money';
+import { GetAccountBalanceService } from '../../../src/application/domain/service/get-account-balance-service';
+import { GetAccountBalanceQuery } from '../../../src/application/port/in/get-account-balance-use-case';
+
+import type { LoadAccountPort } from '../../../src/application/port/out/load-account-port';
 
 class InMemoryLoadAccountPort implements LoadAccountPort {
   constructor(private account: Account) {}
-  async loadAccount(_accountId: AccountId, _baselineDate: Date): Promise<Account> {
-    return this.account;
+  loadAccount(_accountId: AccountId, _baselineDate: Date): Promise<Account> {
+    return Promise.resolve(this.account);
   }
 }
 

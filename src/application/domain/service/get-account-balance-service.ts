@@ -1,9 +1,9 @@
-import {
+import type {
   GetAccountBalanceQuery,
   GetAccountBalanceUseCase,
-} from '../../port/in/GetAccountBalanceUseCase';
-import { LoadAccountPort } from '../../port/out/LoadAccountPort';
-import { Money } from '../model/Money';
+} from '../../port/in/get-account-balance-use-case';
+import type { LoadAccountPort } from '../../port/out/load-account-port';
+import type { Money } from '../model/money';
 
 export class GetAccountBalanceService implements GetAccountBalanceUseCase {
   constructor(private readonly loadAccountPort: LoadAccountPort) {}
