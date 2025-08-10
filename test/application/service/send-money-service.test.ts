@@ -1,14 +1,14 @@
 import { Account, AccountId } from '../../../src/application/domain/model/account';
-import { ActivityWindow } from '../../../src/application/domain/model/activity-window';
+import { ActivityWindow } from '../../../src/application/domain/model/activityWindow';
 import { Money } from '../../../src/application/domain/model/money';
-import { MoneyTransferProperties } from '../../../src/application/domain/service/money-transfer-properties';
-import { SendMoneyService } from '../../../src/application/domain/service/send-money-service';
-import { ThresholdExceededException } from '../../../src/application/domain/service/threshold-exceeded-exception';
-import { SendMoneyCommand } from '../../../src/application/port/in/send-money-command';
+import { MoneyTransferProperties } from '../../../src/application/domain/service/moneyTransferProperties';
+import { SendMoneyService } from '../../../src/application/domain/service/sendMoneyService';
+import { ThresholdExceededException } from '../../../src/application/domain/service/thresholdExceededException';
+import { SendMoneyCommand } from '../../../src/application/port/in/sendMoneyCommand';
 
-import type { AccountLock } from '../../../src/application/port/out/account-lock';
-import type { LoadAccountPort } from '../../../src/application/port/out/load-account-port';
-import type { UpdateAccountStatePort } from '../../../src/application/port/out/update-account-state-port';
+import type { AccountLock } from '../../../src/application/port/out/accountLock';
+import type { LoadAccountPort } from '../../../src/application/port/out/loadAccountPort';
+import type { UpdateAccountStatePort } from '../../../src/application/port/out/updateAccountStatePort';
 
 class InMemoryAccountLock implements AccountLock {
   locked: AccountId[] = [];

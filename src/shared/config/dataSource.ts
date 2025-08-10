@@ -18,7 +18,6 @@ export const AppDataSource = new DataSource({
   password: process.env.DB_PASSWORD || 'postgres',
   database: process.env.DB_NAME || 'buckpal',
   entities: [AccountEntity, ActivityEntity],
-  // Migrations compiled to dist; ts-node execution can point to src
   migrations: [path.join(__dirname, '../../../migrations/*.{ts,js}')],
   synchronize: process.env.TYPEORM_SYNCHRONIZE === 'true',
   logging: process.env.TYPEORM_LOGGING === 'true',

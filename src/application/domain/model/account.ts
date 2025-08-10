@@ -1,7 +1,7 @@
 import { Activity } from './activity';
 import { Money } from './money';
 
-import type { ActivityWindow } from './activity-window';
+import type { ActivityWindow } from './activityWindow';
 
 export class AccountId {
   constructor(public readonly value: number) {}

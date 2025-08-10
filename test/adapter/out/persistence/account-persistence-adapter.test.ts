@@ -1,10 +1,10 @@
 import 'reflect-metadata';
 import { DataSource } from 'typeorm';
 
-import { AccountMapper } from '../../../../src/adapter/out/persistence/account-mapper';
-import { AccountPersistenceAdapter } from '../../../../src/adapter/out/persistence/account-persistence-adapter';
-import { AccountEntity } from '../../../../src/adapter/out/persistence/entity/account-entity';
-import { ActivityEntity } from '../../../../src/adapter/out/persistence/entity/activity-entity';
+import { AccountMapper } from '../../../../src/adapter/out/persistence/accountMapper';
+import { AccountPersistenceAdapter } from '../../../../src/adapter/out/persistence/accountPersistenceAdapter';
+import { AccountEntity } from '../../../../src/adapter/out/persistence/entity/accountEntity';
+import { ActivityEntity } from '../../../../src/adapter/out/persistence/entity/activityEntity';
 import { AccountId } from '../../../../src/application/domain/model/account';
 import { Activity } from '../../../../src/application/domain/model/activity';
 import { Money } from '../../../../src/application/domain/model/money';

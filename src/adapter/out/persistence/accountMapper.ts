@@ -1,11 +1,11 @@
 import { Account, AccountId } from '../../../application/domain/model/account';
 import { Activity, ActivityId } from '../../../application/domain/model/activity';
-import { ActivityWindow } from '../../../application/domain/model/activity-window';
+import { ActivityWindow } from '../../../application/domain/model/activityWindow';
 import { Money } from '../../../application/domain/model/money';
 
-import { ActivityEntity } from './entity/activity-entity';
+import { ActivityEntity } from './entity/activityEntity';
 
-import type { AccountEntity } from './entity/account-entity';
+import type { AccountEntity } from './entity/accountEntity';
 
 export class AccountMapper {
   mapToDomainEntity(
@@ -15,14 +15,12 @@ export class AccountMapper {
     depositBalance: number,
   ): Account {
     const baselineBalance = Money.subtract(Money.of(depositBalance), Money.of(withdrawalBalance));
-
     return Account.withId(
       new AccountId(account.id),
       baselineBalance,
       this.mapToActivityWindow(activities),
     );
   }
-
   mapToActivityWindow(activities: ActivityEntity[]): ActivityWindow {
     const mapped = activities.map(
       (a) =>
@@ -37,7 +35,6 @@ export class AccountMapper {
     );
     return new ActivityWindow(mapped);
   }
-
   mapToEntity(activity: Activity): ActivityEntity {
     const entity = new ActivityEntity();
     if (activity.id) entity.id = activity.id.value;

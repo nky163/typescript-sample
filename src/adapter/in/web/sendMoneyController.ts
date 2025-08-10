@@ -3,9 +3,9 @@ import { z } from 'zod';
 
 import { AccountId } from '../../../application/domain/model/account';
 import { Money } from '../../../application/domain/model/money';
-import { SendMoneyCommand } from '../../../application/port/in/send-money-command';
+import { SendMoneyCommand } from '../../../application/port/in/sendMoneyCommand';
 
-import type { SendMoneyUseCase } from '../../../application/port/in/send-money-use-case';
+import type { SendMoneyUseCase } from '../../../application/port/in/sendMoneyUseCase';
 import type { Request, Response, NextFunction } from 'express';
 
 export function createSendMoneyRouter(sendMoneyUseCase: SendMoneyUseCase) {
@@ -14,14 +14,13 @@ export function createSendMoneyRouter(sendMoneyUseCase: SendMoneyUseCase) {
   router.post(
     '/accounts/send/:sourceAccountId/:targetAccountId/:amount',
     (req: Request, res: Response, next: NextFunction) => {
-      // 非同期処理をラップし Promise を呼び出し元に返さない (no-misused-promises 回避)
       void (async () => {
         const paramsSchema = z.object({
-          sourceAccountId: z.string().regex(/^\d+$/),
-          targetAccountId: z.string().regex(/^\d+$/),
+          sourceAccountId: z.string().regex(/^[\d]+$/),
+          targetAccountId: z.string().regex(/^[\d]+$/),
           amount: z
             .string()
-            .regex(/^\d+$/)
+            .regex(/^[\d]+$/)
             .refine((v) => Number(v) > 0, 'amount must be > 0'),
         });
 
