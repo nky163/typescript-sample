@@ -7,6 +7,12 @@ import type { LoadAccountPort } from '../../../application/port/out/loadAccountP
 import type { UpdateAccountStatePort } from '../../../application/port/out/updateAccountStatePort';
 import type { DataSource, Repository } from 'typeorm';
 
+/**
+ * 永続化アダプタ: アカウント読み取り / 活動履歴更新担当。
+ * - クエリ: 基準日以前の入出金を SUM 集計し差分から baselineBalance 再構築
+ * - 性能前提: 1 アカウント活動件数 < 5k
+ * - トランザクション境界開始責務: 上位サービス
+ */
 export class AccountPersistenceAdapter implements LoadAccountPort, UpdateAccountStatePort {
   private accountRepo: Repository<AccountEntity>;
   private activityRepo: Repository<ActivityEntity>;

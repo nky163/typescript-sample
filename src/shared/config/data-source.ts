@@ -24,6 +24,11 @@ export const AppDataSource = new DataSource({
   logging: process.env.TYPEORM_LOGGING === 'true',
 });
 
+/**
+ * TypeORM DataSource 初期化。
+ * - 冪等: 既に初期化済みなら再初期化しない
+ * - 副作用: DB 接続確立 / 環境変数に基づきマイグレーション設定読み込み
+ */
 export async function initDataSource(): Promise<DataSource> {
   if (!AppDataSource.isInitialized) {
     await AppDataSource.initialize();

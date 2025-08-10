@@ -3,10 +3,12 @@ import { Money } from './money';
 
 import type { ActivityWindow } from './activityWindow';
 
+/** ID 値オブジェクト */
 export class AccountId {
   constructor(public readonly value: number) {}
 }
 
+/** アカウント集約 */
 export class Account {
   private constructor(
     private readonly id: AccountId | null,

@@ -1,3 +1,5 @@
+import { daysAgo } from '../../../shared/time/time';
+
 import { ThresholdExceededException } from './thresholdExceededException';
 
 import type { MoneyTransferProperties } from './moneyTransferProperties';
@@ -7,6 +9,12 @@ import type { AccountLock } from '../../port/out/accountLock';
 import type { LoadAccountPort } from '../../port/out/loadAccountPort';
 import type { UpdateAccountStatePort } from '../../port/out/updateAccountStatePort';
 
+/**
+ * 送金ユースケース実装。
+ * - 副作用: アカウント読取/書込, ロック取得/解放, 活動履歴更新
+ * - トランザクション境界: 呼び出し側で管理
+ * - 例外: 閾値超過時 ThresholdExceededException, ID 欠落時 Error
+ */
 export class SendMoneyService implements SendMoneyUseCase {
   constructor(
     private readonly loadAccountPort: LoadAccountPort,
@@ -17,7 +25,8 @@ export class SendMoneyService implements SendMoneyUseCase {
 
   async sendMoney(command: SendMoneyCommand): Promise<boolean> {
     this.checkThreshold(command);
-    const baselineDate = new Date(Date.now() - 10 * 24 * 60 * 60 * 1000);
+    // 過去 10 日 (長期履歴はアーカイブ)
+    const baselineDate = daysAgo(10);
     const sourceAccount = await this.loadAccountPort.loadAccount(
       command.sourceAccountId,
       baselineDate,
@@ -30,11 +39,13 @@ export class SendMoneyService implements SendMoneyUseCase {
     const targetAccountId = targetAccount.getId();
     if (!sourceAccountId || !targetAccountId)
       throw new Error('expected account IDs not to be empty');
+    // 副作用: ロック取得 (source)
     await this.accountLock.lockAccount(sourceAccountId);
     if (!sourceAccount.withdraw(command.money, targetAccountId)) {
       await this.accountLock.releaseAccount(sourceAccountId);
       return false;
     }
+    // 副作用: ロック取得 (target)
     await this.accountLock.lockAccount(targetAccountId);
     if (!targetAccount.deposit(command.money, sourceAccountId)) {
       await this.accountLock.releaseAccount(sourceAccountId);

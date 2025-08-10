@@ -1,5 +1,8 @@
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
+/**
+ *
+ */
 @Entity('activity')
 export class ActivityEntity {
   @PrimaryGeneratedColumn()

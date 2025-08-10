@@ -1,10 +1,16 @@
 import type { AccountId } from './account';
 import type { Money } from './money';
 
+/**
+ *
+ */
 export class ActivityId {
   constructor(public readonly value: number) {}
 }
 
+/**
+ *
+ */
 export class Activity {
   constructor(
     public readonly id: ActivityId | null,

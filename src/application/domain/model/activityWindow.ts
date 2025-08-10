@@ -3,6 +3,9 @@ import { Money } from './money';
 import type { AccountId } from './account';
 import type { Activity } from './activity';
 
+/**
+ *
+ */
 export class ActivityWindow {
   private activities: Activity[];
   constructor(activities: Activity[] = []) {

@@ -1,5 +1,6 @@
 import { Decimal } from 'decimal.js';
 
+/** 金額値オブジェクト (不変) */
 export class Money {
   public static ZERO = Money.of(0);
 

@@ -5,6 +5,7 @@ import pluginImport from 'eslint-plugin-import';
 import pluginUnused from 'eslint-plugin-unused-imports';
 import pluginPrettier from 'eslint-plugin-prettier';
 import pluginN from 'eslint-plugin-n';
+import pluginJsdoc from 'eslint-plugin-jsdoc';
 import { FlatCompat } from '@eslint/eslintrc';
 
 const compat = new FlatCompat({ baseDirectory: process.cwd() });
@@ -32,7 +33,8 @@ export default [
       import: pluginImport,
       'unused-imports': pluginUnused,
       prettier: pluginPrettier,
-      n: pluginN
+  n: pluginN,
+  jsdoc: pluginJsdoc
     },
     rules: {
       'prettier/prettier': 'error',
@@ -46,6 +48,19 @@ export default [
         { assertionStyle: 'as', objectLiteralTypeAssertions: 'never' }
       ],
       '@typescript-eslint/prefer-as-const': 'error',
+      // JSDoc (export クラス/関数の説明)
+      'jsdoc/require-description': 'warn',
+      'jsdoc/require-jsdoc': [
+        'warn',
+        {
+          publicOnly: true,
+            require: { ClassDeclaration: true, FunctionDeclaration: true },
+            contexts: [
+              'ClassDeclaration',
+              'FunctionDeclaration'
+            ]
+        }
+      ],
   'prefer-const': ['error', { destructuring: 'all' }],
   'no-var': 'error',
   'func-style': ['error', 'declaration', { allowArrowFunctions: true }],

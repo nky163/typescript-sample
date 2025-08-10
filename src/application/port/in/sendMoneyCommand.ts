@@ -15,6 +15,9 @@ export const sendMoneyCommandSchema = z.object({
   targetAccountId: z.instanceof(AccountId, { message: 'targetAccountId must be AccountId' }),
   money: z.custom<Money>(isPositiveMoney, 'Money must be positive'),
 });
+/**
+ *
+ */
 export class SendMoneyCommand {
   constructor(
     public readonly sourceAccountId: AccountId,

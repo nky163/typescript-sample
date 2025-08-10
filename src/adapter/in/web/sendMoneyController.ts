@@ -4,10 +4,12 @@ import { z } from 'zod';
 import { AccountId } from '../../../application/domain/model/account';
 import { Money } from '../../../application/domain/model/money';
 import { SendMoneyCommand } from '../../../application/port/in/sendMoneyCommand';
+import { logger } from '../../../shared/logging/logger';
 
 import type { SendMoneyUseCase } from '../../../application/port/in/sendMoneyUseCase';
 import type { Request, Response, NextFunction } from 'express';
 
+/** 送金エンドポイントルータ */
 export function createSendMoneyRouter(sendMoneyUseCase: SendMoneyUseCase) {
   const router = express.Router();
 
@@ -43,6 +45,7 @@ export function createSendMoneyRouter(sendMoneyUseCase: SendMoneyUseCase) {
           res.status(204).send();
         } catch (e: unknown) {
           const message = e instanceof Error ? e.message : 'unknown error';
+          logger.warn('sendMoney failed', { message, sourceAccountId, targetAccountId });
           res.status(400).json({ error: message });
         }
       })().catch(next);

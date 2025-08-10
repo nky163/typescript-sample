@@ -7,6 +7,7 @@ import { ActivityEntity } from './entity/activityEntity';
 
 import type { AccountEntity } from './entity/accountEntity';
 
+/** 永続化エンティティ <-> ドメインモデル 変換 (副作用なし) */
 export class AccountMapper {
   mapToDomainEntity(
     account: AccountEntity,
