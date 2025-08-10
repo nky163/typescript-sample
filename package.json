@@ -19,7 +19,9 @@
     "format": "prettier --write .",
     "typecheck": "tsc --noEmit",
     "check": "npm run typecheck && npm run lint",
-    "ci": "npm run check && npm run dep:check && npm test",
+    "ci:lint": "npm run lint && npm run format:check",
+    "ci:test": "npm test",
+    "ci": "npm run typecheck && npm run ci:lint && npm run dep:check && npm run ci:test",
     "dep:check": "dependency-cruise -c .dependency-cruiser.js src | tee dependency-graph.dot"
   },
   "dependencies": {
