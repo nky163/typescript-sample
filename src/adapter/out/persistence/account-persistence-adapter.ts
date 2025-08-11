@@ -1,10 +1,10 @@
-import { AccountEntity } from './entity/accountEntity';
-import { ActivityEntity } from './entity/activityEntity';
+import { AccountEntity } from './entity/account-entity';
+import { ActivityEntity } from './entity/activity-entity';
 
-import type { AccountMapper } from './accountMapper';
+import type { AccountMapper } from './account-mapper';
 import type { Account, AccountId } from '../../../application/domain/model/account';
-import type { LoadAccountPort } from '../../../application/port/out/loadAccountPort';
-import type { UpdateAccountStatePort } from '../../../application/port/out/updateAccountStatePort';
+import type { LoadAccountPort } from '../../../application/port/out/load-account-port';
+import type { UpdateAccountStatePort } from '../../../application/port/out/update-account-state-port';
 import type { DataSource, Repository } from 'typeorm';
 
 /**

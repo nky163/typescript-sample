@@ -1,6 +1,6 @@
 import { AccountId } from '../../../../src/application/domain/model/account';
 import { Money } from '../../../../src/application/domain/model/money';
-import { SendMoneyCommand } from '../../../../src/application/port/in/sendMoneyCommand';
+import { SendMoneyCommand } from '../../../../src/application/port/in/send-money-command';
 
 describe('SendMoneyCommandTest', () => {
   it('validationOk', () => {

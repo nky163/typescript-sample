@@ -1,11 +1,11 @@
 import { Account, AccountId } from '../../../src/application/domain/model/account';
 import { Activity } from '../../../src/application/domain/model/activity';
-import { ActivityWindow } from '../../../src/application/domain/model/activityWindow';
+import { ActivityWindow } from '../../../src/application/domain/model/activity-window';
 import { Money } from '../../../src/application/domain/model/money';
-import { GetAccountBalanceService } from '../../../src/application/domain/service/getAccountBalanceService';
-import { GetAccountBalanceQuery } from '../../../src/application/port/in/getAccountBalanceUseCase';
+import { GetAccountBalanceService } from '../../../src/application/domain/service/get-account-balance-service';
+import { GetAccountBalanceQuery } from '../../../src/application/port/in/get-account-balance-use-case';
 
-import type { LoadAccountPort } from '../../../src/application/port/out/loadAccountPort';
+import type { LoadAccountPort } from '../../../src/application/port/out/load-account-port';
 
 class InMemoryLoadAccountPort implements LoadAccountPort {
   constructor(private account: Account) {}

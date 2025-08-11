@@ -10,6 +10,7 @@
     "build": "tsc",
     "migrate": "ts-node scripts/migrate.ts",
     "seed": "ts-node scripts/seed.ts",
+    "rename:kebab": "ts-node scripts/rename-to-kebab-case.ts",
     "test:db:up": "docker compose -f docker-compose.test.yml up -d db",
     "test:db:down": "docker compose -f docker-compose.test.yml down -v",
     "test": "npm run test:db:up && DB_HOST=localhost DB_PORT=5432 DB_USER=user DB_PASSWORD=password DB_NAME=sample_db sh -c 'npm run migrate && jest' && npm run test:db:down",

@@ -3,10 +3,10 @@ import { z } from 'zod';
 
 import { AccountId } from '../../../application/domain/model/account';
 import { Money } from '../../../application/domain/model/money';
-import { SendMoneyCommand } from '../../../application/port/in/sendMoneyCommand';
+import { SendMoneyCommand } from '../../../application/port/in/send-money-command';
 import { logger } from '../../../shared/logging/logger';
 
-import type { SendMoneyUseCase } from '../../../application/port/in/sendMoneyUseCase';
+import type { SendMoneyUseCase } from '../../../application/port/in/send-money-use-case';
 import type { Request, Response, NextFunction } from 'express';
 
 /** 送金エンドポイントルータ */

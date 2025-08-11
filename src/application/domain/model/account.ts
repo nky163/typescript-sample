@@ -1,7 +1,7 @@
 import { Activity } from './activity';
 import { Money } from './money';
 
-import type { ActivityWindow } from './activityWindow';
+import type { ActivityWindow } from './activity-window';
 
 /** ID 値オブジェクト */
 export class AccountId {

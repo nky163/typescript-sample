@@ -2,16 +2,16 @@ import 'reflect-metadata';
 import { Client } from 'pg';
 import { DataSource } from 'typeorm';
 
-import { AccountMapper } from '../../src/adapter/out/persistence/accountMapper';
-import { AccountPersistenceAdapter } from '../../src/adapter/out/persistence/accountPersistenceAdapter';
-import { AccountEntity } from '../../src/adapter/out/persistence/entity/accountEntity';
-import { ActivityEntity } from '../../src/adapter/out/persistence/entity/activityEntity';
-import { NoOpAccountLock } from '../../src/adapter/out/persistence/noOpAccountLock';
+import { AccountMapper } from '../../src/adapter/out/persistence/account-mapper';
+import { AccountPersistenceAdapter } from '../../src/adapter/out/persistence/account-persistence-adapter';
+import { AccountEntity } from '../../src/adapter/out/persistence/entity/account-entity';
+import { ActivityEntity } from '../../src/adapter/out/persistence/entity/activity-entity';
+import { NoOpAccountLock } from '../../src/adapter/out/persistence/no-op-account-lock';
 import { AccountId } from '../../src/application/domain/model/account';
 import { Money } from '../../src/application/domain/model/money';
-import { MoneyTransferProperties } from '../../src/application/domain/service/moneyTransferProperties';
-import { SendMoneyService } from '../../src/application/domain/service/sendMoneyService';
-import { SendMoneyCommand } from '../../src/application/port/in/sendMoneyCommand';
+import { MoneyTransferProperties } from '../../src/application/domain/service/money-transfer-properties';
+import { SendMoneyService } from '../../src/application/domain/service/send-money-service';
+import { SendMoneyCommand } from '../../src/application/port/in/send-money-command';
 
 let dataSource: DataSource;
 

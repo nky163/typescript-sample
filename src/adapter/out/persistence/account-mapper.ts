@@ -1,11 +1,11 @@
 import { Account, AccountId } from '../../../application/domain/model/account';
 import { Activity, ActivityId } from '../../../application/domain/model/activity';
-import { ActivityWindow } from '../../../application/domain/model/activityWindow';
+import { ActivityWindow } from '../../../application/domain/model/activity-window';
 import { Money } from '../../../application/domain/model/money';
 
-import { ActivityEntity } from './entity/activityEntity';
+import { ActivityEntity } from './entity/activity-entity';
 
-import type { AccountEntity } from './entity/accountEntity';
+import type { AccountEntity } from './entity/account-entity';
 
 /** 永続化エンティティ <-> ドメインモデル 変換 (副作用なし) */
 export class AccountMapper {

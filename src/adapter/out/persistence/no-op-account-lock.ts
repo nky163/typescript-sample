@@ -1,5 +1,5 @@
 import type { AccountId } from '../../../application/domain/model/account';
-import type { AccountLock } from '../../../application/port/out/accountLock';
+import type { AccountLock } from '../../../application/port/out/account-lock';
 
 /**
  *

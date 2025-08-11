@@ -1,6 +1,6 @@
 import { AccountId } from '../../../src/application/domain/model/account';
 import { Activity } from '../../../src/application/domain/model/activity';
-import { ActivityWindow } from '../../../src/application/domain/model/activityWindow';
+import { ActivityWindow } from '../../../src/application/domain/model/activity-window';
 import { Money } from '../../../src/application/domain/model/money';
 
 describe('ActivityWindow', () => {

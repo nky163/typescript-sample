@@ -2,10 +2,10 @@
 import express from 'express';
 import request from 'supertest';
 
-import { createSendMoneyRouter } from '../../../../src/adapter/in/web/sendMoneyController';
+import { createSendMoneyRouter } from '../../../../src/adapter/in/web/send-money-controller';
 
-import type { SendMoneyCommand } from '../../../../src/application/port/in/sendMoneyCommand';
-import type { SendMoneyUseCase } from '../../../../src/application/port/in/sendMoneyUseCase';
+import type { SendMoneyCommand } from '../../../../src/application/port/in/send-money-command';
+import type { SendMoneyUseCase } from '../../../../src/application/port/in/send-money-use-case';
 
 class MockSendMoneyUseCase implements SendMoneyUseCase {
   lastCommand?: SendMoneyCommand;

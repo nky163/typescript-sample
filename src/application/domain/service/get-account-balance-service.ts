@@ -3,8 +3,8 @@ import { daysAgo } from '../../../shared/time/time';
 import type {
   GetAccountBalanceQuery,
   GetAccountBalanceUseCase,
-} from '../../port/in/getAccountBalanceUseCase';
-import type { LoadAccountPort } from '../../port/out/loadAccountPort';
+} from '../../port/in/get-account-balance-use-case';
+import type { LoadAccountPort } from '../../port/out/load-account-port';
 import type { Money } from '../model/money';
 
 /**

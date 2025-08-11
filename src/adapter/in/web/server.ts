@@ -4,17 +4,17 @@ import { DataSource } from 'typeorm';
 
 import { AccountId } from '../../../application/domain/model/account';
 import { Money } from '../../../application/domain/model/money';
-import { GetAccountBalanceService } from '../../../application/domain/service/getAccountBalanceService';
-import { MoneyTransferProperties } from '../../../application/domain/service/moneyTransferProperties';
-import { SendMoneyService } from '../../../application/domain/service/sendMoneyService';
-import { GetAccountBalanceQuery } from '../../../application/port/in/getAccountBalanceUseCase';
-import { AccountMapper } from '../../out/persistence/accountMapper';
-import { AccountPersistenceAdapter } from '../../out/persistence/accountPersistenceAdapter';
-import { AccountEntity } from '../../out/persistence/entity/accountEntity';
-import { ActivityEntity } from '../../out/persistence/entity/activityEntity';
-import { NoOpAccountLock } from '../../out/persistence/noOpAccountLock';
+import { GetAccountBalanceService } from '../../../application/domain/service/get-account-balance-service';
+import { MoneyTransferProperties } from '../../../application/domain/service/money-transfer-properties';
+import { SendMoneyService } from '../../../application/domain/service/send-money-service';
+import { GetAccountBalanceQuery } from '../../../application/port/in/get-account-balance-use-case';
+import { AccountMapper } from '../../out/persistence/account-mapper';
+import { AccountPersistenceAdapter } from '../../out/persistence/account-persistence-adapter';
+import { AccountEntity } from '../../out/persistence/entity/account-entity';
+import { ActivityEntity } from '../../out/persistence/entity/activity-entity';
+import { NoOpAccountLock } from '../../out/persistence/no-op-account-lock';
 
-import { createSendMoneyRouter } from './sendMoneyController';
+import { createSendMoneyRouter } from './send-money-controller';
 
 const app = express();
 
