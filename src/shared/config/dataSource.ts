@@ -18,7 +18,9 @@ export const AppDataSource = new DataSource({
   password: process.env.DB_PASSWORD || 'postgres',
   database: process.env.DB_NAME || 'buckpal',
   entities: [AccountEntity, ActivityEntity],
-  migrations: [path.join(__dirname, '../../../migrations/*.{ts,js}')],
+  // Migrations colocated with persistence layer for cohesion:
+  // src/adapter/out/persistence/migrations -> dist/.../persistence/migrations
+  migrations: [path.join(__dirname, '../../adapter/out/persistence/migrations/*.{ts,js}')],
   synchronize: process.env.TYPEORM_SYNCHRONIZE === 'true',
   logging: process.env.TYPEORM_LOGGING === 'true',
 });
