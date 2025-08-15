@@ -1,11 +1,23 @@
 import { Activity } from './activity';
+import { ValueObject } from './common/base-model';
 import { Money } from './money';
 
 import type { ActivityWindow } from './activity-window';
 
 /** ID 値オブジェクト */
-export class AccountId {
-  constructor(public readonly value: number) {}
+export class AccountId extends ValueObject<'AccountId', number> {
+  constructor(value: number) {
+    super(value);
+  }
+
+  protected isValid(value: number): void {
+    // AccountIdの生成に関する不変条件
+    if (value <= 0) throw new Error('Invalid AccountId');
+  }
+
+  isEqual(other: AccountId): boolean {
+    return this.value === other.value;
+  }
 }
 
 /** アカウント集約 */

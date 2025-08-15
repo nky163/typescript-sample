@@ -11,9 +11,6 @@ export class ActivityWindow {
   constructor(activities: Activity[] = []) {
     this.activities = [...activities];
   }
-  static of(...activities: Activity[]): ActivityWindow {
-    return new ActivityWindow(activities);
-  }
   getStartTimestamp(): Date {
     if (!this.activities.length) throw new Error('No activities');
     return this.activities.reduce((m, a) => (a.timestamp < m.timestamp ? a : m)).timestamp;
@@ -23,13 +20,12 @@ export class ActivityWindow {
     return this.activities.reduce((m, a) => (a.timestamp > m.timestamp ? a : m)).timestamp;
   }
   calculateBalance(accountId: AccountId): Money {
-    const id = Number(accountId.value);
     const deposit = this.activities
-      .filter((a) => Number(a.targetAccountId.value) === id)
+      .filter((a) => a.targetAccountId.isEqual(accountId))
       .map((a) => a.money)
       .reduce((acc, m) => Money.add(acc, m), Money.ZERO);
     const withdrawal = this.activities
-      .filter((a) => Number(a.sourceAccountId.value) === id)
+      .filter((a) => a.sourceAccountId.isEqual(accountId))
       .map((a) => a.money)
       .reduce((acc, m) => Money.add(acc, m), Money.ZERO);
     return Money.add(deposit, withdrawal.negate());

@@ -26,21 +26,21 @@ describe('ActivityWindow', () => {
   }
 
   it('calculates start timestamp', () => {
-    const window = ActivityWindow.of(
+    const window = new ActivityWindow([
       defaultActivity({ timestamp: startDate() }),
       defaultActivity({ timestamp: inBetweenDate() }),
       defaultActivity({ timestamp: endDate() }),
-    );
+    ]);
 
     expect(window.getStartTimestamp()).toEqual(startDate());
   });
 
   it('calculates end timestamp', () => {
-    const window = ActivityWindow.of(
+    const window = new ActivityWindow([
       defaultActivity({ timestamp: startDate() }),
       defaultActivity({ timestamp: inBetweenDate() }),
       defaultActivity({ timestamp: endDate() }),
-    );
+    ]);
 
     expect(window.getEndTimestamp()).toEqual(endDate());
   });
@@ -49,7 +49,7 @@ describe('ActivityWindow', () => {
     const account1 = new AccountId(1);
     const account2 = new AccountId(2);
 
-    const window = ActivityWindow.of(
+    const window = new ActivityWindow([
       defaultActivity({
         sourceAccountId: account1,
         targetAccountId: account2,
@@ -61,7 +61,7 @@ describe('ActivityWindow', () => {
         targetAccountId: account1,
         money: Money.of(500),
       }),
-    );
+    ]);
 
     expect(window.calculateBalance(account1).getAmount()).toBe(-500);
     expect(window.calculateBalance(account2).getAmount()).toBe(500);

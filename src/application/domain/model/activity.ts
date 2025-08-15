@@ -1,11 +1,22 @@
+import { ValueObject } from './common/base-model';
+
 import type { AccountId } from './account';
 import type { Money } from './money';
-
 /**
  *
  */
-export class ActivityId {
-  constructor(public readonly value: number) {}
+export class ActivityId extends ValueObject<'ActivityId', number> {
+  constructor(value: number) {
+    super(value);
+  }
+  protected isValid(value: number): void {
+    // ActivityIdの生成に関する不変条件
+    if (value <= 0) throw new Error('Invalid ActivityId');
+  }
+
+  isEqual(other: ActivityId): boolean {
+    return this.value === other.value;
+  }
 }
 
 /**
@@ -20,14 +31,4 @@ export class Activity {
     public readonly timestamp: Date,
     public readonly money: Money,
   ) {}
-
-  static withoutId(
-    ownerAccountId: AccountId,
-    sourceAccountId: AccountId,
-    targetAccountId: AccountId,
-    timestamp: Date,
-    money: Money,
-  ): Activity {
-    return new Activity(null, ownerAccountId, sourceAccountId, targetAccountId, timestamp, money);
-  }
 }
