@@ -106,7 +106,15 @@ export default [
     files: ['test/**/*.{ts,tsx}'],
     rules: {
       '@typescript-eslint/no-explicit-any': 'off',
-      '@typescript-eslint/no-non-null-assertion': 'off'
+  '@typescript-eslint/no-non-null-assertion': 'off',
+  // Allow using dynamic any access patterns in test doubles
+  '@typescript-eslint/no-unsafe-member-access': 'off',
+  '@typescript-eslint/no-unsafe-call': 'off',
+  '@typescript-eslint/no-unsafe-return': 'off',
+  '@typescript-eslint/no-unsafe-assignment': 'off',
+  // Tests may patch methods / not await helpers intentionally
+  '@typescript-eslint/require-await': 'off',
+  '@typescript-eslint/unbound-method': 'off'
     }
   },
   {
